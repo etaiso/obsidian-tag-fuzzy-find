@@ -1,6 +1,7 @@
 import { Plugin } from "obsidian";
 import { DEFAULT_SETTINGS, PersistedData, PluginSettings } from "./types";
-import { normalizeSettings, TagFinderSettingTab } from "./settings";
+import { normalizeSettings } from "./settings";
+import { TagFinderSettingTab } from "./settingsTab";
 import { RecentTags, RecentTagsStore } from "./recentTags";
 import { TagSuggestModal } from "./tagSuggestModal";
 import { NoteSuggestModal } from "./noteSuggestModal";
