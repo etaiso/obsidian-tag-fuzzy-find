@@ -1,0 +1,10 @@
+{
+  "id": "tag-finder",
+  "name": "Tag Finder",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Quickly find a tag in your vault, then jump to a note that uses it.",
+  "author": "etais",
+  "authorUrl": "https://github.com/etais",
+  "isDesktopOnly": false
+}
