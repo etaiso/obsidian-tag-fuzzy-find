@@ -31,6 +31,12 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
       const value = target.value;
       if (!value.startsWith("#")) return;
 
+      // Stop the event from reaching the Quick Switcher's own input handler.
+      // Without this, the QS re-processes '#' and re-opens itself on top of
+      // Tag Finder's modal stack, leaving a leftover modal after drill-down.
+      evt.stopPropagation();
+      evt.stopImmediatePropagation();
+
       // Close whichever modal is active (the Quick Switcher).
       // `activeModal` is not in Obsidian's public typings — safe cast.
       const activeModal = (app.workspace as unknown as { activeModal?: { close(): void } }).activeModal;
