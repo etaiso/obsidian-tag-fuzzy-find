@@ -84,4 +84,20 @@ describe("RecentTags", () => {
     await r.push("#b"); // should not throw
     expect(r.get()).toEqual(["#b", "#a"]);
   });
+
+  it("serializes concurrent pushes so persisted state matches final in-memory state", async () => {
+    const store = makeStore([]);
+    const r = new RecentTags(store, 10);
+    await r.init();
+
+    // Fire two pushes without awaiting between them.
+    const p1 = r.push("#a");
+    const p2 = r.push("#b");
+    await Promise.all([p1, p2]);
+
+    expect(r.get()).toEqual(["#b", "#a"]);
+    expect(store.peek()).toEqual(["#b", "#a"]);
+    // Each push triggers one save call.
+    expect(store.save).toHaveBeenCalledTimes(2);
+  });
 });

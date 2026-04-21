@@ -5,6 +5,7 @@ export interface RecentTagsStore {
 
 export class RecentTags {
   private list: string[] = [];
+  private saveQueue: Promise<void> = Promise.resolve();
   private limit: number;
 
   constructor(private readonly store: RecentTagsStore, initialLimit: number) {
@@ -40,11 +41,16 @@ export class RecentTags {
     await this.persist();
   }
 
-  private async persist(): Promise<void> {
-    try {
-      await this.store.save(this.list);
-    } catch (err) {
-      console.warn("[tag-finder] failed to save recent tags", err);
-    }
+  private persist(): Promise<void> {
+    const snapshot = [...this.list];
+    const next = this.saveQueue.then(async () => {
+      try {
+        await this.store.save(snapshot);
+      } catch (err) {
+        console.warn("[tag-finder] failed to save recent tags", err);
+      }
+    });
+    this.saveQueue = next;
+    return next;
   }
 }
