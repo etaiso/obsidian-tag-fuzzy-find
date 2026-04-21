@@ -32,15 +32,20 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
       if (!value.startsWith("#")) return;
 
       // Stop the event from reaching the Quick Switcher's own input handler.
-      // Without this, the QS re-processes '#' and re-opens itself on top of
-      // Tag Finder's modal stack, leaving a leftover modal after drill-down.
       evt.stopPropagation();
       evt.stopImmediatePropagation();
 
-      // Close whichever modal is active (the Quick Switcher).
-      // `activeModal` is not in Obsidian's public typings — safe cast.
-      const activeModal = (app.workspace as unknown as { activeModal?: { close(): void } }).activeModal;
-      activeModal?.close();
+      // Close the Quick Switcher by dispatching Escape to its input.
+      // `app.workspace.activeModal` is not reliably exposed across Obsidian
+      // builds; Escape-dispatch uses the modal's own keymap and always works.
+      target.dispatchEvent(new KeyboardEvent("keydown", {
+        key: "Escape",
+        code: "Escape",
+        keyCode: 27,
+        which: 27,
+        bubbles: true,
+        cancelable: true,
+      }));
 
       queryAfterHash = value.slice(1);
     } catch (err) {
