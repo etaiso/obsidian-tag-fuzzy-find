@@ -8,14 +8,17 @@ export type QuickSwitcherReroute = (initialQueryAfterHash: string) => void;
  * prompt. When that happens we close the built-in modal and invoke the
  * reroute callback with the text after the '#'.
  *
- * Returns an uninstaller. All listener wiring is wrapped in try/catch so that
- * a single failure disables the hook for the rest of the session.
+ * Returns an uninstaller. DOM-inspection errors (e.g. Obsidian changes the
+ * switcher internals) permanently disable the hook for the session; errors
+ * thrown by the `reroute` callback are logged but do NOT disable the hook.
  */
 export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute): () => void {
   let disabled = false;
 
   const handler = (evt: Event) => {
     if (disabled) return;
+
+    let queryAfterHash: string;
     try {
       const target = evt.target as HTMLElement | null;
       if (!(target instanceof HTMLInputElement)) return;
@@ -28,15 +31,25 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
       const value = target.value;
       if (!value.startsWith("#")) return;
 
-      // Close whichever modal is active (the Quick Switcher) and reroute.
+      // Close whichever modal is active (the Quick Switcher).
       // `activeModal` is not in Obsidian's public typings — safe cast.
       const activeModal = (app.workspace as unknown as { activeModal?: { close(): void } }).activeModal;
       activeModal?.close();
 
-      reroute(value.slice(1));
+      queryAfterHash = value.slice(1);
     } catch (err) {
       disabled = true;
       console.warn("[tag-finder] quick-switcher hook disabled after error", err);
+      return;
+    }
+
+    // Call reroute outside the DOM-inspection try/catch so that downstream
+    // errors don't disable the hook. They'll surface in the console but the
+    // next '#' keypress will still be intercepted.
+    try {
+      reroute(queryAfterHash);
+    } catch (err) {
+      console.warn("[tag-finder] reroute callback threw", err);
     }
   };
 
