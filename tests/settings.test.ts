@@ -32,4 +32,19 @@ describe("normalizeSettings", () => {
     expect(normalizeSettings({ recentLimit: 3.7 }).recentLimit).toBe(3);
     expect(normalizeSettings({ recentLimit: "ten" }).recentLimit).toBe(DEFAULT_SETTINGS.recentLimit);
   });
+
+  it("treats NaN and Infinity as invalid recentLimit", () => {
+    expect(normalizeSettings({ recentLimit: NaN }).recentLimit).toBe(DEFAULT_SETTINGS.recentLimit);
+    expect(normalizeSettings({ recentLimit: Infinity }).recentLimit).toBe(DEFAULT_SETTINGS.recentLimit);
+    expect(normalizeSettings({ recentLimit: -Infinity }).recentLimit).toBe(DEFAULT_SETTINGS.recentLimit);
+  });
+
+  it("ignores extra unknown keys on the input", () => {
+    const result = normalizeSettings({ foo: "bar", recentLimit: 5, junk: { nested: true } });
+    expect(result).toEqual({ ...DEFAULT_SETTINGS, recentLimit: 5 });
+  });
+
+  it("treats array input as empty object (all defaults)", () => {
+    expect(normalizeSettings(["not", "an", "object"])).toEqual(DEFAULT_SETTINGS);
+  });
 });
