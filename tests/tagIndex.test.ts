@@ -35,6 +35,11 @@ describe("sortTagsForEmptyState", () => {
     const out = sortTagsForEmptyState(entries, ["#zzz", "#alpha"], "recent-then-usage");
     expect(out.map(e => e.tag)).toEqual(["#alpha", "#beta", "#gamma"]);
   });
+
+  it("recent-then-usage: duplicates in the recent list are deduped (first occurrence wins)", () => {
+    const out = sortTagsForEmptyState(entries, ["#alpha", "#alpha", "#beta"], "recent-then-usage");
+    expect(out.map(e => e.tag)).toEqual(["#alpha", "#beta", "#gamma"]);
+  });
 });
 
 describe("filterFilesByTag", () => {
