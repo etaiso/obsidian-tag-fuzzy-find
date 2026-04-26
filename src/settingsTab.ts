@@ -51,7 +51,7 @@ export class TagFinderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Integrate with Quick Switcher")
-      .setDesc("Open Tag Finder when the Quick Switcher input starts with '#'.")
+      .setDesc("Open Tag Finder when the Quick Switcher input starts with the trigger character above.")
       .addToggle(t =>
         t.setValue(plugin.settings.enableQuickSwitcherHook).onChange(async value => {
           plugin.settings.enableQuickSwitcherHook = value;
