@@ -1,8 +1,8 @@
 import { App, PluginSettingTab, Setting, Notice } from "obsidian";
-import type TagFinderPlugin from "./main";
+import type TagFuzzyFindPlugin from "./main";
 
-export class TagFinderSettingTab extends PluginSettingTab {
-  constructor(app: App, private plugin: TagFinderPlugin) {
+export class TagFuzzyFindSettingTab extends PluginSettingTab {
+  constructor(app: App, private plugin: TagFuzzyFindPlugin) {
     super(app, plugin);
   }
 
@@ -30,7 +30,7 @@ export class TagFinderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Quick Switcher trigger")
-      .setDesc("First character to type in the Quick Switcher to open Tag Finder.")
+      .setDesc("First character to type in the Quick Switcher to open Tag Fuzzy Find.")
       .addDropdown(dd =>
         dd
           .addOptions({
@@ -51,7 +51,7 @@ export class TagFinderSettingTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Integrate with Quick Switcher")
-      .setDesc("Open Tag Finder when the Quick Switcher input starts with the trigger character above.")
+      .setDesc("Open Tag Fuzzy Find when the Quick Switcher input starts with the trigger character above.")
       .addToggle(t =>
         t.setValue(plugin.settings.enableQuickSwitcherHook).onChange(async value => {
           plugin.settings.enableQuickSwitcherHook = value;

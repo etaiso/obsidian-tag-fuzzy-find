@@ -1,6 +1,6 @@
 {
-  "id": "tag-finder",
-  "name": "Tag Finder",
+  "id": "tag-fuzzy-find",
+  "name": "Tag Fuzzy Find",
   "version": "0.1.0",
   "minAppVersion": "1.5.0",
   "description": "Quickly find a tag in your vault, then jump to a note that uses it.",

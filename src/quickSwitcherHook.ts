@@ -54,7 +54,7 @@ export function installQuickSwitcherHook(
       queryAfterPrefix = value.slice(triggerPrefix.length);
     } catch (err) {
       disabled = true;
-      console.warn("[tag-finder] quick-switcher hook disabled after error", err);
+      console.warn("[tag-fuzzy-find] quick-switcher hook disabled after error", err);
       return;
     }
 
@@ -64,14 +64,14 @@ export function installQuickSwitcherHook(
     try {
       reroute(queryAfterPrefix);
     } catch (err) {
-      console.warn("[tag-finder] reroute callback threw", err);
+      console.warn("[tag-fuzzy-find] reroute callback threw", err);
     }
   };
 
   try {
     document.addEventListener("input", handler, true);
   } catch (err) {
-    console.warn("[tag-finder] quick-switcher hook unavailable", err);
+    console.warn("[tag-fuzzy-find] quick-switcher hook unavailable", err);
     return () => {};
   }
 

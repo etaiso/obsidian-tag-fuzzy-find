@@ -47,7 +47,7 @@ export class RecentTags {
       try {
         await this.store.save(snapshot);
       } catch (err) {
-        console.warn("[tag-finder] failed to save recent tags", err);
+        console.warn("[tag-fuzzy-find] failed to save recent tags", err);
       }
     });
     this.saveQueue = next;

@@ -59,11 +59,11 @@ export class NoteSuggestModal extends SuggestModal<RankedFile> {
   }
 
   renderSuggestion(item: RankedFile, el: HTMLElement): void {
-    const row = el.createDiv({ cls: "tag-finder-note-row" });
-    row.createSpan({ text: item.file.basename, cls: "tag-finder-note-title" });
+    const row = el.createDiv({ cls: "tag-fuzzy-find-note-row" });
+    row.createSpan({ text: item.file.basename, cls: "tag-fuzzy-find-note-title" });
     const parent = item.file.parent?.path;
     if (parent && parent !== "/") {
-      row.createSpan({ text: ` — ${parent}`, cls: "tag-finder-note-path" });
+      row.createSpan({ text: ` — ${parent}`, cls: "tag-fuzzy-find-note-path" });
     }
   }
 
@@ -81,7 +81,7 @@ export class NoteSuggestModal extends SuggestModal<RankedFile> {
     if (this.candidates.length === 0) {
       this.resultContainerEl.empty();
       this.resultContainerEl.createDiv({
-        cls: "tag-finder-empty",
+        cls: "tag-fuzzy-find-empty",
         text: `No notes tagged ${this.tag}.`,
       });
     }

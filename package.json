@@ -1,5 +1,5 @@
 {
-  "name": "obsidian-tag-finder",
+  "name": "obsidian-tag-fuzzy-find",
   "version": "0.1.0",
   "description": "Find tags and tagged notes via a two-step modal.",
   "main": "main.js",

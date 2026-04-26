@@ -5,7 +5,7 @@
  * docs/test-plan.md.
  *
  * Usage:
- *   npx tsx scripts/seed-vault.ts ~/Documents/TagFinderTestVault
+ *   npx tsx scripts/seed-vault.ts ~/Documents/TagFuzzyFindTestVault
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";

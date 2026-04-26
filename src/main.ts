@@ -1,13 +1,13 @@
 import { Plugin } from "obsidian";
 import { DEFAULT_SETTINGS, PersistedData, PluginSettings } from "./types";
 import { normalizeSettings } from "./settings";
-import { TagFinderSettingTab } from "./settingsTab";
+import { TagFuzzyFindSettingTab } from "./settingsTab";
 import { RecentTags, RecentTagsStore } from "./recentTags";
 import { TagSuggestModal } from "./tagSuggestModal";
 import { NoteSuggestModal } from "./noteSuggestModal";
 import { installQuickSwitcherHook } from "./quickSwitcherHook";
 
-export default class TagFinderPlugin extends Plugin {
+export default class TagFuzzyFindPlugin extends Plugin {
   settings: PluginSettings = { ...DEFAULT_SETTINGS };
   recent!: RecentTags;
   private uninstallHook: (() => void) | null = null;
@@ -34,7 +34,7 @@ export default class TagFinderPlugin extends Plugin {
       callback: () => this.openTagPicker(""),
     });
 
-    this.addSettingTab(new TagFinderSettingTab(this.app, this));
+    this.addSettingTab(new TagFuzzyFindSettingTab(this.app, this));
     this.refreshQuickSwitcherHook();
   }
 

@@ -5,7 +5,7 @@ import builtins from "builtin-modules";
 const prod = process.argv[2] === "production";
 
 const context = await esbuild.context({
-  banner: { js: "/* Tag Finder — built by esbuild */" },
+  banner: { js: "/* Tag Fuzzy Find — built by esbuild */" },
   entryPoints: ["src/main.ts"],
   bundle: true,
   external: [

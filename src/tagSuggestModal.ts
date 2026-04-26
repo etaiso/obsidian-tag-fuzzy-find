@@ -58,11 +58,11 @@ export class TagSuggestModal extends SuggestModal<Ranked> {
   }
 
   renderSuggestion(item: Ranked, el: HTMLElement): void {
-    const row = el.createDiv({ cls: "tag-finder-row" });
-    row.createSpan({ text: item.entry.tag, cls: "tag-finder-tag" });
+    const row = el.createDiv({ cls: "tag-fuzzy-find-row" });
+    row.createSpan({ text: item.entry.tag, cls: "tag-fuzzy-find-tag" });
     row.createSpan({
       text: ` · ${item.entry.count} ${item.entry.count === 1 ? "note" : "notes"}`,
-      cls: "tag-finder-count",
+      cls: "tag-fuzzy-find-count",
     });
   }
 
@@ -79,7 +79,7 @@ export class TagSuggestModal extends SuggestModal<Ranked> {
     if (this.allTags.length === 0) {
       this.resultContainerEl.empty();
       this.resultContainerEl.createDiv({
-        cls: "tag-finder-empty",
+        cls: "tag-fuzzy-find-empty",
         text: "No tags found in this vault.",
       });
     }
