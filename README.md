@@ -2,6 +2,8 @@
 
 A Quick Switcher for tags. Fuzzy-find any tag in your vault, then jump straight to a note that uses it — without leaving the keyboard.
 
+![Tag Fuzzy Find demo](docs/assets/demo.gif)
+
 > Status: pre-release. Not yet listed in the Obsidian Community Plugins marketplace; install manually via [Releases](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases) until it is approved.
 
 ## What it does
