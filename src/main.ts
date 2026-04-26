@@ -61,7 +61,11 @@ export default class TagFinderPlugin extends Plugin {
     this.uninstallHook?.();
     this.uninstallHook = null;
     if (this.settings.enableQuickSwitcherHook) {
-      this.uninstallHook = installQuickSwitcherHook(this.app, (q) => this.openTagPicker(q));
+      this.uninstallHook = installQuickSwitcherHook(
+        this.app,
+        (q) => this.openTagPicker(q),
+        this.settings.triggerPrefix,
+      );
     }
   }
 

@@ -1,24 +1,28 @@
 import { App } from "obsidian";
 
-export type QuickSwitcherReroute = (initialQueryAfterHash: string) => void;
+export type QuickSwitcherReroute = (initialQueryAfterPrefix: string) => void;
 
 /**
  * Install a document-level 'input' capture listener that detects when the
- * user has typed '#' as the first character in the built-in Quick Switcher
- * prompt. When that happens we close the built-in modal and invoke the
- * reroute callback with the text after the '#'.
+ * user has typed `triggerPrefix` as the first character in the built-in
+ * Quick Switcher prompt. When that happens we close the built-in modal and
+ * invoke the reroute callback with the text after the prefix.
  *
  * Returns an uninstaller. DOM-inspection errors (e.g. Obsidian changes the
  * switcher internals) permanently disable the hook for the session; errors
  * thrown by the `reroute` callback are logged but do NOT disable the hook.
  */
-export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute): () => void {
+export function installQuickSwitcherHook(
+  app: App,
+  reroute: QuickSwitcherReroute,
+  triggerPrefix: string,
+): () => void {
   let disabled = false;
 
   const handler = (evt: Event) => {
     if (disabled) return;
 
-    let queryAfterHash: string;
+    let queryAfterPrefix: string;
     try {
       const target = evt.target as HTMLElement | null;
       if (!(target instanceof HTMLInputElement)) return;
@@ -29,7 +33,7 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
       if (!target.closest(".prompt .prompt-input-container")) return;
 
       const value = target.value;
-      if (!value.startsWith("#")) return;
+      if (!value.startsWith(triggerPrefix)) return;
 
       // Stop the event from reaching the Quick Switcher's own input handler.
       evt.stopPropagation();
@@ -47,7 +51,7 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
         cancelable: true,
       }));
 
-      queryAfterHash = value.slice(1);
+      queryAfterPrefix = value.slice(triggerPrefix.length);
     } catch (err) {
       disabled = true;
       console.warn("[tag-finder] quick-switcher hook disabled after error", err);
@@ -56,9 +60,9 @@ export function installQuickSwitcherHook(app: App, reroute: QuickSwitcherReroute
 
     // Call reroute outside the DOM-inspection try/catch so that downstream
     // errors don't disable the hook. They'll surface in the console but the
-    // next '#' keypress will still be intercepted.
+    // next prefix keypress will still be intercepted.
     try {
-      reroute(queryAfterHash);
+      reroute(queryAfterPrefix);
     } catch (err) {
       console.warn("[tag-finder] reroute callback threw", err);
     }

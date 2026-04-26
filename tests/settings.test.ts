@@ -47,4 +47,21 @@ describe("normalizeSettings", () => {
   it("treats array input as empty object (all defaults)", () => {
     expect(normalizeSettings(["not", "an", "object"])).toEqual(DEFAULT_SETTINGS);
   });
+
+  it("keeps each valid triggerPrefix", () => {
+    for (const prefix of ["#", ":", "@", "!", ">", "?"] as const) {
+      expect(normalizeSettings({ triggerPrefix: prefix }).triggerPrefix).toBe(prefix);
+    }
+  });
+
+  it("falls back to '#' when triggerPrefix is missing", () => {
+    expect(normalizeSettings({}).triggerPrefix).toBe("#");
+  });
+
+  it("falls back to '#' when triggerPrefix is invalid", () => {
+    const cases = ["", "##", "a", "Z", "1", " ", "/", null, 42, ["#"], { v: "#" }];
+    for (const bad of cases) {
+      expect(normalizeSettings({ triggerPrefix: bad }).triggerPrefix).toBe("#");
+    }
+  });
 });

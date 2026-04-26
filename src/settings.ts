@@ -1,9 +1,19 @@
-import { DEFAULT_SETTINGS, EmptyStateMode, PluginSettings } from "./types";
+import {
+  DEFAULT_SETTINGS,
+  EmptyStateMode,
+  PluginSettings,
+  TriggerPrefix,
+  VALID_PREFIXES,
+} from "./types";
 
 const VALID_MODES: EmptyStateMode[] = ["recent-then-usage", "usage", "alphabetical", "blank"];
 
 function isValidMode(v: unknown): v is EmptyStateMode {
   return typeof v === "string" && (VALID_MODES as string[]).includes(v);
+}
+
+function isValidPrefix(v: unknown): v is TriggerPrefix {
+  return typeof v === "string" && (VALID_PREFIXES as string[]).includes(v);
 }
 
 export function normalizeSettings(raw: unknown): PluginSettings {
@@ -22,5 +32,9 @@ export function normalizeSettings(raw: unknown): PluginSettings {
     recentLimit = Math.max(0, Math.min(30, Math.floor(source.recentLimit)));
   }
 
-  return { emptyStateMode, enableQuickSwitcherHook, recentLimit };
+  const triggerPrefix = isValidPrefix(source.triggerPrefix)
+    ? source.triggerPrefix
+    : DEFAULT_SETTINGS.triggerPrefix;
+
+  return { emptyStateMode, enableQuickSwitcherHook, recentLimit, triggerPrefix };
 }
