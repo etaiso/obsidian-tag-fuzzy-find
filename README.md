@@ -96,6 +96,10 @@ npm run dev   # esbuild watch — rewrites main.js on save
    ```bash
    npx tsx scripts/seed-vault.ts ~/Documents/TagFuzzyFindTestVault
    ```
+   For richer, demo-friendly content (realistic note titles and tag hierarchies — useful when recording screenshots or a GIF), use the demo seed instead in a dedicated vault:
+   ```bash
+   npx tsx scripts/seed-demo-vault.ts ~/Documents/TagFuzzyFindDemoVault
+   ```
 
 ### Tests
 
