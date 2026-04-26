@@ -20,3 +20,6 @@ Run before each release against a vault seeded by `scripts/seed-vault.ts`. Each 
 | 14 | Clear recent | Settings → "Clear recent tags", reopen | Recent list is empty |
 | 15 | File deleted mid-flow | In note picker, delete highlighted file via Finder, press Enter | `Notice("File no longer exists.")`, no crash |
 | 16 | Disable/enable cycle | Disable plugin, re-enable, open modal | Works; no duplicate DOM listener (verify by running #12 — only one reroute fires) |
+| 17 | Trigger prefix `:` works | Settings → Quick Switcher trigger → `:`; Cmd+O; type `:foo` | Built-in switcher closes, Tag Finder opens with `foo` pre-filled |
+| 18 | Old prefix no longer triggers | With trigger set to `:`; Cmd+O; type `#foo` | Built-in switcher behaves normally — Tag Finder is NOT opened |
+| 19 | Hook re-arms on toggle cycle | Hook OFF → change trigger to `@` → Hook ON; Cmd+O; type `@x` | Tag Finder opens with `x`. Toggle off and `@x` should NOT trigger anymore |
