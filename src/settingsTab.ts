@@ -29,6 +29,27 @@ export class TagFinderSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
+      .setName("Quick Switcher trigger")
+      .setDesc("First character to type in the Quick Switcher to open Tag Finder.")
+      .addDropdown(dd =>
+        dd
+          .addOptions({
+            "#": "# (Hash)",
+            ":": ": (Colon)",
+            "@": "@ (At sign)",
+            "!": "! (Exclamation mark)",
+            ">": "> (Greater than)",
+            "?": "? (Question mark)",
+          })
+          .setValue(plugin.settings.triggerPrefix)
+          .onChange(async value => {
+            plugin.settings.triggerPrefix = value as typeof plugin.settings.triggerPrefix;
+            await plugin.savePluginData();
+            plugin.refreshQuickSwitcherHook();
+          }),
+      );
+
+    new Setting(containerEl)
       .setName("Integrate with Quick Switcher")
       .setDesc("Open Tag Finder when the Quick Switcher input starts with '#'.")
       .addToggle(t =>
