@@ -1,8 +1,7 @@
 import { App, SuggestModal, prepareFuzzySearch, SearchResult } from "obsidian";
-import { EmptyStateMode, PluginSettings, TagEntry } from "./types";
+import { PluginSettings, TagEntry } from "./types";
 import { getAllTags, sortTagsForEmptyState } from "./tagIndex";
 import { RecentTags } from "./recentTags";
-import { NoteSuggestModal } from "./noteSuggestModal";
 
 type Ranked = { entry: TagEntry; match: SearchResult | null };
 
@@ -24,7 +23,7 @@ export class TagSuggestModal extends SuggestModal<Ranked> {
   }
 
   onOpen(): void {
-    super.onOpen();
+    void super.onOpen();
     if (this.initialQuery) {
       this.inputEl.value = this.initialQuery;
       this.inputEl.dispatchEvent(new Event("input"));
@@ -66,8 +65,8 @@ export class TagSuggestModal extends SuggestModal<Ranked> {
     });
   }
 
-  async onChooseSuggestion(item: Ranked): Promise<void> {
-    await this.recent.push(item.entry.tag);
+  onChooseSuggestion(item: Ranked): void {
+    void this.recent.push(item.entry.tag);
     const query = this.lastQuery;
     this.close();
     this.onPick(item.entry.tag, query);

@@ -6,6 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-04-27
+
+### Fixed
+- Address findings from the Obsidian community-plugin reviewer bot:
+  - Drop unnecessary `async` modifiers on `Plugin.onunload`, `SuggestModal.onChooseSuggestion`, and the `RecentTagsStore.load` factory (each had no `await` and the parent type expects `void`).
+  - Fire-and-forget `recent.push` and `leaf.openFile` with `void` so they don't bubble unhandled-promise warnings out of the `void`-typed handlers.
+  - Replace a spurious non-null assertion in `onload` with a typed guard.
+  - Adopt sentence case for "Quick switcher" UI strings in the settings tab (matches Obsidian's own UI).
+- Removed unused `EmptyStateMode` and `NoteSuggestModal` imports from `tagSuggestModal.ts`.
+
 ## [0.1.0] - 2026-04-26
 
 ### Added
@@ -17,5 +27,6 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Drill-down keyboard shortcuts: `Enter` (current pane), `Cmd/Ctrl+Enter` (new tab), `Shift+Enter` (split), `Backspace` on empty query (back to tag picker), `Esc` (close).
 - "Clear recent tags" button in settings.
 
-[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.0...HEAD
+[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.1...HEAD
+[0.1.1]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.1
 [0.1.0]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.0

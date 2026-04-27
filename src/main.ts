@@ -15,12 +15,15 @@ export default class TagFuzzyFindPlugin extends Plugin {
   async onload() {
     const persisted = (await this.loadData()) as Partial<PersistedData> | null;
     this.settings = normalizeSettings(persisted?.settings);
-    const persistedRecent = Array.isArray(persisted?.recentTags)
-      ? persisted!.recentTags.filter((v: unknown): v is string => typeof v === "string")
-      : [];
+    const persistedRecent: string[] = [];
+    if (persisted && Array.isArray(persisted.recentTags)) {
+      for (const v of persisted.recentTags) {
+        if (typeof v === "string") persistedRecent.push(v);
+      }
+    }
 
     const recentStore: RecentTagsStore = {
-      load: async () => persistedRecent,
+      load: () => Promise.resolve(persistedRecent),
       save: async next => {
         await this.saveData({ settings: this.settings, recentTags: next });
       },
@@ -38,7 +41,7 @@ export default class TagFuzzyFindPlugin extends Plugin {
     this.refreshQuickSwitcherHook();
   }
 
-  async onunload() {
+  onunload() {
     this.uninstallHook?.();
     this.uninstallHook = null;
   }

@@ -29,8 +29,8 @@ export class TagFuzzyFindSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Quick Switcher trigger")
-      .setDesc("First character to type in the Quick Switcher to open Tag Fuzzy Find.")
+      .setName("Quick switcher trigger")
+      .setDesc("First character to type in the Quick switcher to open Tag Fuzzy Find.")
       .addDropdown(dd =>
         dd
           .addOptions({
@@ -50,8 +50,8 @@ export class TagFuzzyFindSettingTab extends PluginSettingTab {
       );
 
     new Setting(containerEl)
-      .setName("Integrate with Quick Switcher")
-      .setDesc("Open Tag Fuzzy Find when the Quick Switcher input starts with the trigger character above.")
+      .setName("Integrate with Quick switcher")
+      .setDesc("Open Tag Fuzzy Find when the Quick switcher input starts with the trigger character above.")
       .addToggle(t =>
         t.setValue(plugin.settings.enableQuickSwitcherHook).onChange(async value => {
           plugin.settings.enableQuickSwitcherHook = value;

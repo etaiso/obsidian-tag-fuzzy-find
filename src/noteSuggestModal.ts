@@ -85,14 +85,14 @@ export class NoteSuggestModal extends SuggestModal<RankedFile> {
     }
   }
 
-  async onChooseSuggestion(item: RankedFile, evt: MouseEvent | KeyboardEvent): Promise<void> {
+  onChooseSuggestion(item: RankedFile, evt: MouseEvent | KeyboardEvent): void {
     if ((item.file as { deleted?: boolean }).deleted) {
       new Notice("File no longer exists.");
       return;
     }
     const paneType = this.pickPaneType(evt);
     const leaf = this.app.workspace.getLeaf(paneType);
-    await leaf.openFile(item.file);
+    void leaf.openFile(item.file);
   }
 
   onNoSuggestion(): void {
