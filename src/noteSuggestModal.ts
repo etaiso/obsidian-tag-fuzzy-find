@@ -34,6 +34,24 @@ export class NoteSuggestModal extends SuggestModal<RankedFile> {
       }
       return true;
     });
+
+    // SuggestModal's default scope only binds plain Enter. Register the
+    // modifier chords so Cmd/Ctrl+Enter (new tab) and Shift+Enter (split)
+    // trigger selection with the modifier flag preserved on the event —
+    // pickPaneType reads evt.shiftKey / evt.metaKey to decide.
+    const chooser = (this as unknown as {
+      chooser: { useSelectedItem(evt: KeyboardEvent | MouseEvent): void };
+    }).chooser;
+    this.scope.register(["Mod"], "Enter", (evt) => {
+      evt.preventDefault();
+      chooser.useSelectedItem(evt);
+      return false;
+    });
+    this.scope.register(["Shift"], "Enter", (evt) => {
+      evt.preventDefault();
+      chooser.useSelectedItem(evt);
+      return false;
+    });
   }
 
   getSuggestions(query: string): RankedFile[] {
