@@ -22,11 +22,13 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: "22"
 
       - name: Install dependencies
-        run: npm ci
+        # Using `npm install` (not `npm ci`) — `npm ci` has been hitting
+        # the "Exit handler never called!" npm-internal bug on this runner.
+        # `--no-audit --no-fund` keeps the log quiet.
+        run: npm install --no-audit --no-fund --no-progress
 
       - name: Typecheck
         run: npm run typecheck
