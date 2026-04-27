@@ -1,10 +1,14 @@
 # Tag Fuzzy Find
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/etaiso/obsidian-tag-fuzzy-find?display_name=tag&sort=semver)](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/latest)
+[![Marketplace submission](https://img.shields.io/badge/marketplace-pending%20review-blue)](https://github.com/obsidianmd/obsidian-releases/pull/12337)
+
 A Quick Switcher for tags. Fuzzy-find any tag in your vault, then jump straight to a note that uses it — without leaving the keyboard.
 
 ![Tag Fuzzy Find demo](docs/assets/demo.gif)
 
-> Status: pre-release. Not yet listed in the Obsidian Community Plugins marketplace; install manually via [Releases](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases) until it is approved.
+> **Status:** the plugin is awaiting Obsidian Community Plugins marketplace review (tracking [PR #12337](https://github.com/obsidianmd/obsidian-releases/pull/12337)). Until it lands there, install manually via the [latest release](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/latest) — see Installation below.
 
 ## What it does
 
