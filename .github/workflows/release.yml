@@ -24,11 +24,19 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Pin npm
+        run: npm install -g npm@10
+
       - name: Install dependencies
-        # Using `npm install` (not `npm ci`) — `npm ci` has been hitting
-        # the "Exit handler never called!" npm-internal bug on this runner.
-        # `--no-audit --no-fund` keeps the log quiet.
-        run: npm install --no-audit --no-fund --no-progress
+        # Two GitHub-Actions–specific quirks worked around here:
+        #   1. Pinned npm@10 above (Node 22 ships npm 10.9.x; some patch
+        #      versions hit the "Exit handler never called!" bug on Linux
+        #      runners. Pinning to npm 10 stable avoids it.)
+        #   2. `--ignore-scripts` skips esbuild's postinstall, which has
+        #      been the specific hang point. The platform-specific binary
+        #      is delivered via optionalDependencies regardless of scripts,
+        #      so the bundler still works.
+        run: npm install --no-audit --no-fund --no-progress --ignore-scripts
 
       - name: Typecheck
         run: npm run typecheck
