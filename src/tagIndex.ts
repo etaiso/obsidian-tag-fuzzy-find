@@ -78,7 +78,7 @@ export function tagsForFile(app: App, file: TFile): string[] {
   if (cache.tags) {
     for (const t of cache.tags) result.push(t.tag);
   }
-  const fmTags = cache.frontmatter?.tags;
+  const fmTags: unknown = cache.frontmatter?.tags;
   if (Array.isArray(fmTags)) {
     for (const raw of fmTags) {
       if (typeof raw !== "string") continue;

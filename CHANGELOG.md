@@ -6,6 +6,15 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-04-28
+
+### Added
+- `npm run lint` script using `eslint-plugin-obsidianmd` — same checks the Obsidian community-plugin reviewer bot runs.
+
+### Fixed
+- Reword two settings descriptions to avoid mid-sentence "Tag Fuzzy Find" (the `obsidianmd/ui/sentence-case` rule treats it as title case). They now refer to "this plugin" instead — no loss of clarity since the setting name still establishes context.
+- Type `cache.frontmatter?.tags` as `unknown` instead of letting it fall through as `any` (silences `@typescript-eslint/no-unsafe-assignment`).
+
 ## [0.1.2] - 2026-04-27
 
 ### Fixed
@@ -32,7 +41,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Drill-down keyboard shortcuts: `Enter` (current pane), `Cmd/Ctrl+Enter` (new tab), `Shift+Enter` (split), `Backspace` on empty query (back to tag picker), `Esc` (close).
 - "Clear recent tags" button in settings.
 
-[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.2...HEAD
+[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.3...HEAD
+[0.1.3]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.3
 [0.1.2]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.2
 [0.1.1]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.1
 [0.1.0]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.0
