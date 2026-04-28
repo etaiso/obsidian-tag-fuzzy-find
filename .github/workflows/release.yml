@@ -36,6 +36,12 @@ jobs:
         # pnpm's resolver doesn't have this issue.
         run: pnpm install --no-frozen-lockfile
 
+      - name: Lint
+        # Same rules ObsidianReviewBot runs (eslint-plugin-obsidianmd).
+        # Failing here is a hard stop — the marketplace bot would block
+        # the submission anyway.
+        run: pnpm run lint
+
       - name: Typecheck
         run: pnpm run typecheck
 
