@@ -1,5 +1,6 @@
 # Tag Fuzzy Find
 
+[![CI](https://github.com/etaiso/obsidian-tag-fuzzy-find/actions/workflows/ci.yml/badge.svg)](https://github.com/etaiso/obsidian-tag-fuzzy-find/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/etaiso/obsidian-tag-fuzzy-find?display_name=tag&sort=semver)](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/latest)
 [![Marketplace submission](https://img.shields.io/badge/marketplace-pending%20review-blue)](https://github.com/obsidianmd/obsidian-releases/pull/12337)
