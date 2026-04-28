@@ -6,6 +6,11 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-04-27
+
+### Fixed
+- Mid-sentence "Quick" lowercased in settings descriptions (sentence case applies to mid-sentence words too, not just sub-headings). Cleared the remaining ObsidianReviewBot findings.
+
 ## [0.1.1] - 2026-04-27
 
 ### Fixed
@@ -27,6 +32,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Drill-down keyboard shortcuts: `Enter` (current pane), `Cmd/Ctrl+Enter` (new tab), `Shift+Enter` (split), `Backspace` on empty query (back to tag picker), `Esc` (close).
 - "Clear recent tags" button in settings.
 
-[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.1...HEAD
+[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.2...HEAD
+[0.1.2]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.2
 [0.1.1]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.1
 [0.1.0]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.0
