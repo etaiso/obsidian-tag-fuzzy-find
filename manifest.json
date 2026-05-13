@@ -3,7 +3,7 @@
   "name": "Tag Fuzzy Find",
   "version": "0.1.4",
   "minAppVersion": "1.5.0",
-  "description": "Quickly find a tag in your vault, then jump to a note that uses it.",
+  "description": "Fuzzy-find a tag, then a note tagged with it. Quick Switcher-style, keyboard-only.",
   "author": "Etai Solomon",
   "authorUrl": "https://github.com/etaiso",
   "isDesktopOnly": false

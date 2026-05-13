@@ -3,13 +3,11 @@
 [![CI](https://github.com/etaiso/obsidian-tag-fuzzy-find/actions/workflows/ci.yml/badge.svg)](https://github.com/etaiso/obsidian-tag-fuzzy-find/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Latest release](https://img.shields.io/github/v/release/etaiso/obsidian-tag-fuzzy-find?display_name=tag&sort=semver)](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/latest)
-[![Marketplace submission](https://img.shields.io/badge/marketplace-pending%20review-blue)](https://github.com/obsidianmd/obsidian-releases/pull/12337)
+[![Marketplace](https://img.shields.io/badge/marketplace-listed-success)](https://community.obsidian.md/plugins/tag-fuzzy-find)
 
-A Quick Switcher for tags. Fuzzy-find any tag in your vault, then jump straight to a note that uses it — without leaving the keyboard.
+A keyboard-first Quick Switcher for tags. Fuzzy-find any tag in your vault, then jump straight to a note that uses it. Built for navigation, not tag management — if you've ever wished `Cmd+O` could search tags as well as files, this fills that gap.
 
 ![Tag Fuzzy Find demo](docs/assets/demo.gif)
-
-> **Status:** the plugin is awaiting Obsidian Community Plugins marketplace review (tracking [PR #12337](https://github.com/obsidianmd/obsidian-releases/pull/12337)). Until it lands there, install manually via the [latest release](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/latest) — see Installation below.
 
 ## What it does
 
@@ -32,20 +30,20 @@ It honors Obsidian's nested-tag semantics: choosing `#project` surfaces notes ta
 
 ## Installation
 
-### Manual (until merged into the Community Plugins marketplace)
+### Via Community Plugins (recommended)
 
-1. Download `main.js` and `manifest.json` from the [latest release](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases).
-2. Create the folder `<your-vault>/.obsidian/plugins/obsidian-tag-fuzzy-find/`.
-3. Copy `main.js` and `manifest.json` into it.
-4. In Obsidian: Settings → Community plugins → turn off Restricted Mode → enable **Tag Fuzzy Find**.
+Settings → Community plugins → Browse → search **Tag Fuzzy Find** → Install → Enable.
 
 ### Via [BRAT](https://github.com/TfTHacker/obsidian42-brat)
 
 Add the repo URL `etaiso/obsidian-tag-fuzzy-find` in BRAT and it will install the latest release.
 
-### Via Community Plugins
+### Manual
 
-Once approved, search for **Tag Fuzzy Find** in Settings → Community plugins → Browse.
+1. Download `main.js` and `manifest.json` from the [latest release](https://github.com/etaiso/obsidian-tag-fuzzy-find/releases).
+2. Create the folder `<your-vault>/.obsidian/plugins/obsidian-tag-fuzzy-find/`.
+3. Copy `main.js` and `manifest.json` into it.
+4. In Obsidian: Settings → Community plugins → turn off Restricted Mode → enable **Tag Fuzzy Find**.
 
 ## Usage
 
