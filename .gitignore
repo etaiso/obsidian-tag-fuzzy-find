@@ -4,3 +4,11 @@ main.js
 data.json
 .DS_Store
 .vscode/
+
+# We use pnpm in CI (see .github/workflows). The repo intentionally
+# doesn't ship a lockfile so the Obsidian marketplace verification bot
+# (which runs `npm install`) resolves freshly from registry.npmjs.org
+# instead of inheriting URLs from whatever registry a contributor's
+# local npm happens to be pointed at.
+package-lock.json
+pnpm-lock.yaml

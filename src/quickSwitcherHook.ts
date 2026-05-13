@@ -1,4 +1,4 @@
-import { App } from "obsidian";
+import { App, WorkspaceWindow } from "obsidian";
 
 export type QuickSwitcherReroute = (initialQueryAfterPrefix: string) => void;
 
@@ -7,6 +7,10 @@ export type QuickSwitcherReroute = (initialQueryAfterPrefix: string) => void;
  * user has typed `triggerPrefix` as the first character in the built-in
  * Quick Switcher prompt. When that happens we close the built-in modal and
  * invoke the reroute callback with the text after the prefix.
+ *
+ * The listener is installed on the main document and on each popout
+ * window's document, so the hook fires regardless of which window the
+ * Quick Switcher was opened in.
  *
  * Returns an uninstaller. DOM-inspection errors (e.g. Obsidian changes the
  * switcher internals) permanently disable the hook for the session; errors
@@ -68,14 +72,32 @@ export function installQuickSwitcherHook(
     }
   };
 
-  try {
-    document.addEventListener("input", handler, true);
-  } catch (err) {
-    console.warn("[tag-fuzzy-find] quick-switcher hook unavailable", err);
-    return () => {};
-  }
+  const attachedDocs = new Set<Document>();
+  const attach = (doc: Document) => {
+    if (attachedDocs.has(doc)) return;
+    try {
+      doc.addEventListener("input", handler, true);
+      attachedDocs.add(doc);
+    } catch (err) {
+      console.warn("[tag-fuzzy-find] quick-switcher hook unavailable on document", err);
+    }
+  };
+
+  attach(activeDocument);
+  const windowOpenRef = app.workspace.on(
+    "window-open",
+    (_win: WorkspaceWindow, window: Window) => attach(window.document),
+  );
 
   return () => {
-    document.removeEventListener("input", handler, true);
+    app.workspace.offref(windowOpenRef);
+    for (const doc of attachedDocs) {
+      try {
+        doc.removeEventListener("input", handler, true);
+      } catch {
+        // Document may already be torn down (popout closed); ignore.
+      }
+    }
+    attachedDocs.clear();
   };
 }

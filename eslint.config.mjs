@@ -13,6 +13,11 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
+        // Obsidian exposes these as globals (declared in obsidian.d.ts's
+        // `declare global` block) so popout-window-aware code can read the
+        // currently-focused document/window without going through `app`.
+        activeDocument: "readonly",
+        activeWindow: "readonly",
       },
     },
   },

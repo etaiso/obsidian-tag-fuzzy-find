@@ -6,6 +6,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ## [Unreleased]
 
+## [0.1.4] - 2026-05-13
+
+### Fixed
+- Quick Switcher hook now installs an `input` listener on every popout window's document (via `app.workspace.on("window-open", ...)`), not just the document captured at install time. The hook now fires when the built-in switcher is opened in a popout. Clears the `obsidianmd` "Use 'activeDocument' instead of 'document'" scorecard warning and the `app is defined but never used` warning in `quickSwitcherHook.ts` in one shot.
+- `esbuild.config.mjs` now imports `builtinModules` from Node's built-in `module` instead of the `builtin-modules` npm package. Drops a runtime-redundant dev dependency and clears the `es-tooling/module-replacements` scorecard warning.
+- Removed the committed `package-lock.json` — it was generated against an internal mirror, which prevented the marketplace verification bot's `npm install` from resolving packages. The repo uses pnpm in CI; the bot now resolves freshly from `registry.npmjs.org`. Clears the "Build verification failed" scorecard warning.
+
+### Added
+- Release workflow now signs `main.js` and `manifest.json` with `actions/attest-build-provenance@v2`, producing a GitHub artifact attestation that ties each release back to the workflow run that built it. Clears the "release asset is missing a GitHub artifact attestation" scorecard finding.
+
 ## [0.1.3] - 2026-04-28
 
 ### Added
@@ -41,7 +51,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - Drill-down keyboard shortcuts: `Enter` (current pane), `Cmd/Ctrl+Enter` (new tab), `Shift+Enter` (split), `Backspace` on empty query (back to tag picker), `Esc` (close).
 - "Clear recent tags" button in settings.
 
-[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.3...HEAD
+[Unreleased]: https://github.com/etaiso/obsidian-tag-fuzzy-find/compare/0.1.4...HEAD
+[0.1.4]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.4
 [0.1.3]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.3
 [0.1.2]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.2
 [0.1.1]: https://github.com/etaiso/obsidian-tag-fuzzy-find/releases/tag/0.1.1
